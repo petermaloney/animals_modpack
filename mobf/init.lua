@@ -116,6 +116,9 @@ function mobf_init_module()
 			mobf_registred_mob = {}
 		end
 	end
+
+	--oldcoder mob preference
+        mobf_registred_mob = { "animal_creeper:creeper", "animal_dm:dm",  "animal_big_red:big_red", "mob_slime:slime_L", "mob_slime:slime_M", "mob_slime:slime_S", "mob_npc:npc", "animal_vombie:vombie" }
 		
 	print("Initializing probabilistic movement generator")
 	movement_gen.initialize()
