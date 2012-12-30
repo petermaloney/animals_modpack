@@ -60,7 +60,7 @@ dofile (mobf_modpath .. "/mgen_follow/main_follow.lua")
 dofile (mobf_modpath .. "/mgen_rasterized/mgen_raster.lua")
 dofile (mobf_modpath .. "/mov_gen_none.lua")
 
-mobf_version = "1.4.5"
+mobf_version = "1.4.6"
 
 LOGLEVEL_INFO     = "verbose"
 LOGLEVEL_NOTICE   = "info"
@@ -112,6 +112,9 @@ function mobf_init_module()
 	
 	if mobf_mob_blacklist_string ~= nil then
 		mobf_registred_mob = minetest.deserialize(mobf_mob_blacklist_string)
+		if mobf_registred_mob == nil then
+			mobf_registred_mob = {}
+		end
 	end
 		
 	print("Initializing probabilistic movement generator")
