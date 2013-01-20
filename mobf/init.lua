@@ -131,6 +131,7 @@ function mobf_init_framework()
 --	end
 
 	dofile ( mobf_modpath .. "/oc_mob_selection.lua" )
+	minetest.log(LOGLEVEL_NOTICE,"MOBF: " .. dump(mobf_rtd.registred_mob))
 	
 	minetest.log(LOGLEVEL_NOTICE,"MOBF: Initialize external mod dependencys...")
 	mobf_init_mod_deps()

@@ -8,7 +8,7 @@ oldcoder_moblist.aggressive = {
 				"mob_slime:slime_S"
 				}
 
-oldcoder_moblist.agressive_known_lag = {
+oldcoder_moblist.aggressive_known_lag = {
 				"animal_vombie:vombie",
 				"animal_creeper:creeper"
 				}
@@ -50,13 +50,20 @@ oldcoder_moblist.wild_animals = {
 
 oldcoder_moblist.current_blacklist = {}
 
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.aggressive)
-table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.aggressive_known_lag)
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.flying)
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.fish)
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.farmanimals)
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.npc)
---table.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.wild_animals)
+oldcoder_moblist.insert = function(table1,table2)
+		table.foreach(table2,
+			function(index)
+				table.insert(table1,table2[index])
+			end)
+	end
+
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.aggressive)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.aggressive_known_lag)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.flying)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.fish)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.farmanimals)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.npc)
+--oldcoder_moblist.insert(oldcoder_moblist.current_blacklist,oldcoder_moblist.wild_animals)
 
 minetest.log(LOGLEVEL_NOTICE,"MOBF: Setting oldcoder mob blacklist")
 mobf_rtd.registred_mob = oldcoder_moblist.current_blacklist
