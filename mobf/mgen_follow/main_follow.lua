@@ -11,7 +11,7 @@
 --! @author Sapier
 --! @date 2012-08-09
 --
---! @defgroup mgen_follow Follow movement generator
+--! @defgroup mgen_follow MGEN: follow movement generator
 --! @brief A movement generator creating movement that trys to follow a moving 
 --! target or reach a given point on map
 --! @ingroup framework_int
@@ -88,10 +88,11 @@ end
 --
 --! @param entity mob to check for teleport
 --! @param now current time
+--! @param targetpos position of target
 --!
 --! @return true/false finish processing
 -------------------------------------------------------------------------------
-function mgen_follow.handleteleport(entity,now)
+function mgen_follow.handleteleport(entity,now,targetpos)
 
 	if (entity.dynamic_data.movement.last_next_to_target ~= nil ) then
 		local time_since_next_to_target =
@@ -176,7 +177,7 @@ function mgen_follow.callback(entity,now)
 			local newpos = environment.get_suitable_pos_same_level(basepos,1,entity,true)
 			
 			if newpos == nil then
-				spawning.remove(entity)
+				spawning.remove(entity,"mgen_follow poscheck")
 			else
 				newpos.y = newpos.y - (entity.collisionbox[2] + 0.49)
 				entity.object:moveto(newpos)
@@ -189,9 +190,9 @@ function mgen_follow.callback(entity,now)
 		entity.dynamic_data.movement.guardspawnpoint then
 		dbg_mobf.fmovement_lvl3("MOBF:   Target available")
 		--calculate distance to target
+		local targetpos = entity.dynamic_data.spawning.spawnpoint
 		
 		
-		local targetpos = entity.dynamic_data.spawning.spawnpoint	
 		if entity.dynamic_data.movement.guardspawnpoint ~= true then
 			dbg_mobf.fmovement_lvl3("MOBF:   moving target selected")
 			targetpos = entity.dynamic_data.movement.target:getpos()
@@ -223,7 +224,7 @@ function mgen_follow.callback(entity,now)
 		dbg_mobf.fmovement_lvl3("MOBF: max distance is set to : " .. max_distance)
 		if distance > max_distance then
 		
-			if mgen_follow.handleteleport(entity,now) then
+			if mgen_follow.handleteleport(entity,now,targetpos) then
 				return
 			end
 

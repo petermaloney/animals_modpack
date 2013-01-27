@@ -1,5 +1,21 @@
-local version = "0.0.7"
+-------------------------------------------------------------------------------
+-- Mob Framework Mod by Sapier
+-- 
+-- You may copy, use, modify or do nearly anything except removing this
+-- copyright notice. 
+-- And of course you are NOT allow to pretend you have written it.
+--
+--! @file init.lua
+--! @brief npc implementation
+--! @copyright Sapier
+--! @author Sapier
+--! @date 2013-01-27
+--
+-- Contact sapier a t gmx net
+-------------------------------------------------------------------------------
+minetest.log("action","MOD: mob_npc mod loading ...")
 
+local version = "0.0.9"
 local npc_groups = {
 						not_in_creative_inventory=1
 					}
@@ -137,18 +153,26 @@ npc_trader_prototype = {
 		trader_inventory = {
 				goods = {
 							{ "default:mese 1", "default:dirt 99", "default:cobble 50"},
-							{ "default:steel_ingot 1", "default:dirt 50", "default:cobble 20"},
-							{ "default:stone 1", "default:dirt 10", "default:cobble 5"},
-							{ "default:furnace", "default:steel_ingot 2", nil},
-							{ "default:sword_steel 1", "default:cobble 50", "default:stone 20"},
+							{ "default:steel_ingot 1", "default:mese_crystal 5", "default:cobble 20"},
+							{ "default:stone 5", "default:mese_crystal 1", "default:cobble 50"},
+							{ "default:furnace 1", "default:mese_crystal 3", nil},
+							{ "default:sword_steel 1", "default:mese_crystal 4", "default:stone 20"},
+							{ "bucket:bucket_empty 1", "default:cobble 10", "default:stone 2"},
+							{ "default:pick_mese 1", "default:mese_crystal 12", "default:stone 60"},
+							{ "default:shovel_steel 1", "default:mese_crystal 2", "default:stone 10"},
+							{ "default:axe_steel 1", "default:mese_crystal 2", "default:stone 22"},
+							{ "default:torch 33", "default:mese_crystal 2", "default:stone 10"},
+							{ "default:ladder 12", "default:mese_crystal 1", "default:stone 5"},
+							{ "default:paper 12", "default:mese_crystal 2", "default:stone 10"},
+							{ "default:chest 1", "default:mese_crystal 2", "default:stone 10"},
 						},
 				random_names = { "Hans","Franz","Xaver","Fritz","Thomas","Martin"},
 			}
 		}
 		
 --register with animals mod
-print ("Adding mob "..npc_trader_prototype.name)
+minetest.log("action","\tadding mob "..npc_trader_prototype.name)
 mobf_add_mob(npc_trader_prototype)
-print ("Adding mob "..npc_prototype.name)
+minetest.log("action","\tadding mob "..npc_prototype.name)
 mobf_add_mob(npc_prototype)
-print ("mob_npc mod version " .. version .. " loaded")
+minetest.log("action","MOD: mob_npc mod                version " .. version .. " loaded")

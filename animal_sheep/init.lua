@@ -1,4 +1,21 @@
-local version = "0.0.20"
+-------------------------------------------------------------------------------
+-- Mob Framework Mod by Sapier
+-- 
+-- You may copy, use, modify or do nearly anything except removing this
+-- copyright notice. 
+-- And of course you are NOT allow to pretend you have written it.
+--
+--! @file init.lua
+--! @brief sheep implementation
+--! @copyright Sapier
+--! @author Sapier
+--! @date 2013-01-27
+--
+-- Contact sapier a t gmx net
+-------------------------------------------------------------------------------
+minetest.log("action","MOD: animal_sheep mod loading ...")
+
+local version = "0.0.22"
 
 local sheep_groups = {
 						sheerable=1,
@@ -7,7 +24,7 @@ local sheep_groups = {
 					}
 
 local selectionbox_sheep = {-0.65, -0.8, -0.65, 0.65, 0.45, 0.65}
-local selectionbox_lamb = {-0.65*0.6, -0.8*0.6, -0.65*0.6, 0.65*0.6, 0.45*0.6, 0.65*0.65}		
+local selectionbox_lamb = {-0.65*0.6, -0.8*0.6, -0.65*0.6, 0.65*0.6, 0.45*0.6, 0.65*0.65}
 
 sheep_prototype = {
 		name="sheep",
@@ -132,7 +149,7 @@ sheep_prototype = {
 		
 lamb_prototype = {
 		name="lamb",
-		modname="animal_sheep", 
+		modname="animal_sheep",
 	
 		generic = {
 					description="Lamp",
@@ -361,11 +378,11 @@ minetest.register_craft({
 	}
 })
 
---register with animals mod
-print ("Adding animal "..sheep_prototype.name)
-animals_add_animal(sheep_prototype)
-print ("Adding animal "..sheep_naked_prototype.name)
-animals_add_animal(sheep_naked_prototype)
-print ("Adding animal "..lamb_prototype.name)
-animals_add_animal(lamb_prototype)
-print ("animal_sheep mod version " .. version .. " loaded")
+minetest.log("action","\tadding animal "..sheep_prototype.name)
+mobf_add_mob(sheep_prototype)
+minetest.log("action","\tadding animal "..sheep_naked_prototype.name)
+mobf_add_mob(sheep_naked_prototype)
+minetest.log("action","\tadding animal "..lamb_prototype.name)
+mobf_add_mob(lamb_prototype)
+
+minetest.log("action","MOD: animal_sheep mod           version " .. version .. " loaded")

@@ -19,15 +19,18 @@
 -------------------------------------------------------------------------------
 
 --! @class fighting
---! @brief melee and distance attack features
-fighting = {}
-fighting.on_death_callbacks = {}
-
---!@}
 
 --! @brief factor added to mob melee combat range to get its maximum agression radius
 MOBF_AGRESSION_FACTOR = 5
 
+--!@}
+
+--! @brief fighting class reference
+fighting = {}
+
+--! @brief user defined on death callback
+--! @memberof fighting
+fighting.on_death_callbacks = {}
 
 -------------------------------------------------------------------------------
 -- name: register_on_death_callback(callback)
@@ -69,9 +72,10 @@ end
 --
 --! @brief move a mob backward if it's punched
 --! @memberof fighting
+--! @private
 --
 --! @param entity mobbeing punched
---! @param hitter object doing last punch
+--! @param dir direction to push back
 -------------------------------------------------------------------------------
 function fighting.push_back(entity,dir)
 	--get some base information
@@ -80,7 +84,7 @@ function fighting.push_back(entity,dir)
 	local dir_rad = mobf_calc_yaw(dir.x,dir.z)
 	local posdelta = mobf_calc_vector_components(dir_rad,0.5)
 	
-	--push back mob	
+	--push back mob
 	local new_pos = {
 		x=mob_basepos.x + posdelta.x,
 		y=mob_basepos.y,
@@ -182,7 +186,7 @@ function fighting.hit(entity,player)
 				--todo check if spawning a stack is possible
 				minetest.env:add_item(mob_pos,result)
 			end
-			spawning.remove(entity)
+			spawning.remove(entity, "killed")
 		else
 			dbg_mobf.fighting_lvl2("MOBF: ".. entity.data.name 
 				.. " custom on kill handler superseeds generic handling")
@@ -657,7 +661,7 @@ function fighting.self_destruct_handler(entity,now)
 				else
 					minetest.log(LOGLEVEL_NOTICE,"MOBF: self destruct without fire isn't really impressive!")
 				end
-				spawning.remove(entity)
+				spawning.remove(entity, "self destruct")
 				return true
 			end
 		end
@@ -857,7 +861,7 @@ function fighting.sun_damage_handler(entity,now)
 				if entity.object:get_hp() <= 0 then
 				--if entity.dynamic_data.generic.health <= 0 then
 					dbg_mobf.fighting_lvl2("Mob ".. entity.data.name .. " died of sun")
-					spawning.remove(entity)
+					spawning.remove(entity,"died by sun")
 					return
 				end
 				entity.dynamic_data.combat.ts_last_sun_damage = now
@@ -871,5 +875,4 @@ function fighting.sun_damage_handler(entity,now)
 			end
 		end
 	end
-	
 end
