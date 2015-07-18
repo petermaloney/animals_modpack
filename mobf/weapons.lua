@@ -112,7 +112,7 @@ function mobf_do_node_damage(pos,immune_list,range,chance)
 
 
 						if immune ~= true then
-							minetest.remove_node({x=i,y=j,z=k})
+							--minetest.remove_node({x=i,y=j,z=k})
 						end
 					end
 				end
@@ -349,7 +349,9 @@ function MOBF_PLASMABALL_ENTITY.on_step(self, dtime)
 							toremove.name ~= "default:stone" and
 							toremove.name ~= "default:cobble" then
 
-							minetest.remove_node({x=i,y=j,z=k})
+							
+
+							--minetest.remove_node({x=i,y=j,z=k})
 						end
 					end
 				end

@@ -580,8 +580,19 @@ function mob_state.BuiltinHungerPrecondition(mob)
 						end
 
 						local path = minetest.find_path(pos,targetpos,5,1,1,"A*_noprefetch")
+						local goodpath = false
+						if path then
 
-						if path ~= nil then
+
+							if #path > 1 then
+
+								goodpath = true
+							end
+							
+						end						
+
+ 
+						if goodpath == true then
 							entity.dynamic_data.hunger = {}
 							entity.dynamic_data.hunger.target = { x=targetpos.x,y=targetpos.y-1,z=targetpos.z}
 							entity.dynamic_data.hunger.path = path
